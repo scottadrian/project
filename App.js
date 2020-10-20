@@ -1,21 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {createAppContainer} from "react-navigation";
+import Home from "./components/Home";
+import Map from "./components/Map";
+import Parking from "./components/Parking";
+import Settings from "./components/Settings";
+import {createDrawerNavigator} from "react-navigation-drawer";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+//Navigation laves med router for hver af knapper i navigationen, til de 4 forskellige views
+const navi = createDrawerNavigator({
+    Home: {
+        screen: Home,
+    },
+    Map: {
+        screen: Map,
+    },
+    Parking: {
+        screen: Parking,
+    },
+    Settings: {
+        screen: Settings,
+    }
 });
+
+const AppNav = createAppContainer(navi)
+
+export default class App extends React.Component {
+    render() {
+        return (
+            <AppNav/>
+        )
+    }
+}
